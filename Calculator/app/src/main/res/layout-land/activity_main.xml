@@ -11,6 +11,7 @@
         android:id="@+id/dispay"
         android:layout_width="230dp"
         android:layout_height="262dp"
+        android:scrollbars="vertical"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:gravity="center"

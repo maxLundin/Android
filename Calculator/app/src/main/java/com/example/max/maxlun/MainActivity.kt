@@ -2,12 +2,14 @@ package com.example.max.maxlun
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.TextView
 import java.lang.StringBuilder
 import com.example.max.maxlun.expression.parser.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var but1: TextView
@@ -37,20 +39,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkSize(ch: Char) {
         display.text = sb.append(ch).toString()
-        checkSize()
-    }
-
-    private fun checkSize(flag: Boolean = false) {
-        if (flag) {
-            if (sb.length % 50 == 49) {
-                displyTextSize *= 1.5f
-                display.setTextSize(TypedValue.COMPLEX_UNIT_SP, displyTextSize)
-            }
-        } else if (sb.length % 50 == 0 && sb.isNotEmpty()) {
-            displyTextSize /= 1.5f
-            display.setTextSize(TypedValue.COMPLEX_UNIT_SP, displyTextSize)
-
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         display = findViewById(R.id.dispay)
+        display.movementMethod = ScrollingMovementMethod()
+
         butC = findViewById(R.id.numC)
         but1 = findViewById(R.id.num1)
         but2 = findViewById(R.id.num2)
@@ -85,7 +75,6 @@ class MainActivity : AppCompatActivity() {
             if (sb.isNotEmpty()) {
                 display.text = sb.deleteCharAt(sb.length - 1).toString()
             }
-            checkSize(true)
         }
         butC.setOnClickListener {
             sb.setLength(0);
@@ -124,7 +113,6 @@ class MainActivity : AppCompatActivity() {
                 display.text = "Division By Zero"
                 sb.setLength(0)
             }
-            checkSize()
         }
 
         if (savedInstanceState != null) {
