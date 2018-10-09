@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var butdot: TextView
     private lateinit var butend: TextView
     private lateinit var display: TextView
-    private var displyTextSize = 32f
     private lateinit var butC: TextView
     private lateinit var butback: ImageView
     private lateinit var sb: StringBuilder
@@ -79,8 +78,6 @@ class MainActivity : AppCompatActivity() {
         butC.setOnClickListener {
             sb.setLength(0);
             display.text = "Text"
-            displyTextSize = 32f
-            display.setTextSize(TypedValue.COMPLEX_UNIT_SP, displyTextSize)
         }
         but1.setOnClickListener { checkSize('1') }
         but2.setOnClickListener { checkSize('2') }
