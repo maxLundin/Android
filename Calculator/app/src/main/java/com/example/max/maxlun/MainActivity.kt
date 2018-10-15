@@ -10,6 +10,7 @@ import android.widget.TextView
 import java.lang.StringBuilder
 import com.example.max.maxlun.expression.parser.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
     private lateinit var but1: TextView
@@ -108,6 +109,9 @@ class MainActivity : AppCompatActivity() {
                 sb.setLength(0)
             } catch (e: DivisionByZeroException) {
                 display.text = "Division By Zero"
+                sb.setLength(0)
+            } catch (e: OverflowException) {
+                display.text = "Wrong Number Format"
                 sb.setLength(0)
             }
         }
