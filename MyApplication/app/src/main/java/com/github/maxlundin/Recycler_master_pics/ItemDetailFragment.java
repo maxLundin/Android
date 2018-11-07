@@ -118,7 +118,6 @@ public class ItemDetailFragment extends Fragment {
         rootView.findViewById(R.id.progresspic).setVisibility(View.VISIBLE);
         rootView.findViewById(R.id.item_detail).setVisibility(View.GONE);
         if (mItem != null) {
-            //com.example.max.myapplication.Loader.load(, 1, mItem.content.second);
             byte[] mas;
             while (true) {
                 val res = new DownloadFilesTask().execute(mItem.content.second);

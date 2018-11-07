@@ -51,6 +51,7 @@ public class ItemListActivity extends AppCompatActivity {
     private static ArrayList<DummyContent.DummyItem> LINKS_AND_DESCRIPTION = new ArrayList<>();
     final Context myActivity = this;
     private boolean mTwoPane;
+    boolean flag = false;
     private SimpleItemRecyclerViewAdapter adapterForListOfNamesOfPictures;
     private ServiceConnection serviceConnection1 = new ServiceConnection() {
         @Override
@@ -108,6 +109,7 @@ public class ItemListActivity extends AppCompatActivity {
         }
 
         if (LINKS_AND_DESCRIPTION.size() == 0) {
+            flag = true;
             LINKS_AND_DESCRIPTION.add(new DummyContent.DummyItem("0", new Pair<>("Утя", "https://cs9.pikabu.ru/post_img/2017/01/18/7/1484734874175140604.jpg")));
             ContextCompat.checkSelfPermission(this, INTERNET);
             for (int i = 0; i < Addreses.length; i++) {
@@ -117,11 +119,20 @@ public class ItemListActivity extends AppCompatActivity {
 
             Log.d(LOG_TAG, LINKS_AND_DESCRIPTION.size() + "Hello");
         } else {
+            flag = false;
             LoadPics();
         }
 
 
         //setupRecyclerView((RecyclerView) recyclerView);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if (flag){
+            unbindService(serviceConnection1);
+        }
     }
 
     //private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
