@@ -3,4 +3,4 @@ Android course
 
 1st task - Calculator
 
-2nd task MyApplication
+2nd && 3rd task MyApplication
