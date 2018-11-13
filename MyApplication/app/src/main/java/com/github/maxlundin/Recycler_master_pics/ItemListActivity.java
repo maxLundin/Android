@@ -52,7 +52,6 @@ public class ItemListActivity extends AppCompatActivity {
     final Context myActivity = this;
     private boolean mTwoPane;
     boolean flag = false;
-    private SimpleItemRecyclerViewAdapter adapterForListOfNamesOfPictures;
     private ServiceConnection serviceConnection1 = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -60,6 +59,7 @@ public class ItemListActivity extends AppCompatActivity {
             mMyService.setOnLoad(data ->
             {
                 LINKS_AND_DESCRIPTION = data;
+                LINKS_AND_DESCRIPTION.add(new DummyContent.DummyItem("0", new Pair<>("Утя", "https://cs9.pikabu.ru/post_img/2017/01/18/7/1484734874175140604.jpg")));
                 Log.d(LOG_TAG, LINKS_AND_DESCRIPTION.size() + " ");
                 LoadPics();
             });
@@ -74,7 +74,7 @@ public class ItemListActivity extends AppCompatActivity {
     private void LoadPics() {
 
 
-        adapterForListOfNamesOfPictures = new SimpleItemRecyclerViewAdapter(this, new DummyContent(LINKS_AND_DESCRIPTION.size()), mTwoPane);
+        SimpleItemRecyclerViewAdapter adapterForListOfNamesOfPictures = new SimpleItemRecyclerViewAdapter(this, new DummyContent(LINKS_AND_DESCRIPTION.size()), mTwoPane);
 
         RecyclerView listNames = findViewById(R.id.item_list);
         listNames.setAdapter(adapterForListOfNamesOfPictures);
@@ -110,7 +110,6 @@ public class ItemListActivity extends AppCompatActivity {
 
         if (LINKS_AND_DESCRIPTION.size() == 0) {
             flag = true;
-            LINKS_AND_DESCRIPTION.add(new DummyContent.DummyItem("0", new Pair<>("Утя", "https://cs9.pikabu.ru/post_img/2017/01/18/7/1484734874175140604.jpg")));
             ContextCompat.checkSelfPermission(this, INTERNET);
             for (int i = 0; i < Addreses.length; i++) {
                 LoaderJson.load(myActivity, i, Addreses[i]);
@@ -128,9 +127,9 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if (flag){
+        if (flag) {
             unbindService(serviceConnection1);
         }
     }
